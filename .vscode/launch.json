@@ -3,11 +3,11 @@
     {
       "type": "aws-sam",
       "request": "direct-invoke",
-      "name": "vanity-generator:HelloWorldFunction (nodejs14.x)",
+      "name": "db-checker:VanityGeneratorFunction (nodejs14.x)",
       "invokeTarget": {
         "target": "template",
-        "templatePath": "${workspaceFolder}/vanity-generator/template.yaml",
-        "logicalId": "HelloWorldFunction"
+        "templatePath": "${workspaceFolder}/db-checker/template.yaml",
+        "logicalId": "VanityGeneratorFunction"
       },
       "lambda": {
         "payload": {},
@@ -18,11 +18,46 @@
     {
       "type": "aws-sam",
       "request": "direct-invoke",
-      "name": "API vanity-generator:HelloWorldFunction (nodejs14.x)",
+      "name": "API db-checker:VanityGeneratorFunction (nodejs14.x)",
+      "invokeTarget": {
+        "target": "api",
+        "templatePath": "${workspaceFolder}/db-checker/template.yaml",
+        "logicalId": "VanityGeneratorFunction"
+      },
+      "api": {
+        "path": "/hello",
+        "httpMethod": "get",
+        "payload": {
+          "json": {}
+        }
+      },
+      "lambda": {
+        "runtime": "nodejs14.x"
+      }
+    },
+    {
+      "type": "aws-sam",
+      "request": "direct-invoke",
+      "name": "vanity-generator:VanityGeneratorFunction (nodejs14.x)",
+      "invokeTarget": {
+        "target": "template",
+        "templatePath": "${workspaceFolder}/vanity-generator/template.yaml",
+        "logicalId": "VanityGeneratorFunction"
+      },
+      "lambda": {
+        "payload": {},
+        "environmentVariables": {},
+        "runtime": "nodejs14.x"
+      }
+    },
+    {
+      "type": "aws-sam",
+      "request": "direct-invoke",
+      "name": "API vanity-generator:VanityGeneratorFunction (nodejs14.x)",
       "invokeTarget": {
         "target": "api",
         "templatePath": "${workspaceFolder}/vanity-generator/template.yaml",
-        "logicalId": "HelloWorldFunction"
+        "logicalId": "VanityGeneratorFunction"
       },
       "api": {
         "path": "/hello",
