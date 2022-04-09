@@ -1,6 +1,7 @@
 //-- Bring in the aws-sdk, and used the DocumentClient constructor --//
 //-- The Document Client acts as an interpreter between JavaScript and DynamoDB --//
 const AWS = require('aws-sdk');
+AWS.config.update({ region: "us-west-2" });
 const ddb = new AWS.DynamoDB.DocumentClient({ region: 'us-west-2' });
 
 /**
@@ -43,47 +44,52 @@ exports.lambdaHandler = async (event, context, callback) => {
                 if (wordList.includes(strAdd) && (strAdd.length + tracker === (phoneNumber.length + 1))) {
                     vanityNumbers.add(`${phoneNumber.substring(0, (tracker - 1))}${strAdd}`);
                 } 
-                walk(string, tracker, strAdd, nextIdx);
+                if (vanityNumbers.size < 5) walk(string, tracker, strAdd, nextIdx);
             })
         }
     }
 
     // +11236228464
-    let stringStart = 5;
+    let stringStart = 6;
     let input = event.Details.ContactData.CustomerEndpoint.Address.substring(stringStart);
-    while (input.length >= 4) {
+    console.log(input)
+    while (input.length >= 3) {
         walk(input, stringStart);
         input = event.Details.ContactData.CustomerEndpoint.Address.substring(stringStart++);
-        console.log('here', input);
-        console.log(stringStart)
     }
 
     let result = [...vanityNumbers].join(', ');
 
-    console.log(result);
-    // await addToDB(phoneNumber, result)
-    //     .then(() => {
-    //         callback(null, {
-    //             statusCode: 201,
-    //             body: '',
-    //             headers: {
-    //                 'Access-Control-Allow-Origin': '*'
-    //             }
-    //         })
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //     });
+    let data = await getFromDB(phoneNumber)
+    if (Object.keys(data).length < 1) {
+        await addToDB(phoneNumber, result)
+            .then(() => {
+                callback(null, {
+                    statusCode: 201,
+                    body: '',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    } else {
+        console.log(data);
+        return data;
+    }
 };
 
-function verifyNumber(number) {
+// function verifyNumber(number) {
 
-    if (number.match(/^(\+1|1)?\d{10}$/)) {
-        let cleanNumber = number.replace(/^(\+1|1)/)
-    }
-}
+//     if (number.match(/^(\+1|1)?\d{10}$/)) {
+//         let cleanNumber = number.replace(/^(\+1|1)/)
+//     }
+// }
 
 function addToDB(requestId, data) {
+    console.log('Add to DB called');
     const params = {
         TableName: "VanityNumbers",
         Item: {
@@ -92,4 +98,15 @@ function addToDB(requestId, data) {
         }
     }
     return ddb.put(params).promise();
+}
+
+function getFromDB(requestId) {
+    console.log('Get from DB called');
+    const params = {
+        TableName: "VanityNumbers",
+        Key: {
+            'phoneNumber': requestId,
+        }
+    }
+    return ddb.get(params).promise();
 }
