@@ -23,12 +23,6 @@ const wordList = fs.readFileSync(wordListPath, 'utf8').split('\n');
 exports.lambdaHandler = async (event, context, callback) => {
 
     let phoneNumber = event.Details.ContactData.CustomerEndpoint.Address;
-    // let fullInput = event.Details.ContactData.CustomerEndpoint.Address.substring(5); // unused due to timing out when built with Lambda
-    let firstThree = event.Details.ContactData.CustomerEndpoint.Address.substring(5, 8);
-    let nextFour = event.Details.ContactData.CustomerEndpoint.Address.substring(8);
-
-    let firstFour = event.Details.ContactData.CustomerEndpoint.Address.substring(5, 8);
-    let nextThree = event.Details.ContactData.CustomerEndpoint.Address.substring(8);
 
     let options = [[], ['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'], ['j', 'k', 'l'], ['m', 'n', 'o'], ['p', 'q', 'r', 's'], ['t', 'u', 'v'], ['w', 'x', 'y', 'z']];
     let numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -46,36 +40,48 @@ exports.lambdaHandler = async (event, context, callback) => {
                 let strAdd = output;
                 let nextIdx = index + 1;
                 strAdd += lett;
-                if (wordList.includes(strAdd) && strAdd.length >= 3) vanityNumbers.add(`${tracker} ${strAdd}`);
+                if (wordList.includes(strAdd) && (strAdd.length + tracker === (phoneNumber.length + 1))) {
+                    vanityNumbers.add(`${phoneNumber.substring(0, (tracker - 1))}${strAdd}`);
+                } 
                 walk(string, tracker, strAdd, nextIdx);
             })
         }
     }
 
-    // walk(fullInput, 0);
-    walk(firstThree, 1);
-    walk(nextFour, 2);
-
-    walk(firstFour, 1);
-    walk(nextThree, 2);
+    // +11236228464
+    let stringStart = 5;
+    let input = event.Details.ContactData.CustomerEndpoint.Address.substring(stringStart);
+    while (input.length >= 4) {
+        walk(input, stringStart);
+        input = event.Details.ContactData.CustomerEndpoint.Address.substring(stringStart++);
+        console.log('here', input);
+        console.log(stringStart)
+    }
 
     let result = [...vanityNumbers].join(', ');
 
-
-    await addToDB(phoneNumber, result)
-        .then(() => {
-            callback(null, {
-                statusCode: 201,
-                body: '',
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                }
-            })
-        })
-        .catch((err) => {
-            console.log(err)
-        });
+    console.log(result);
+    // await addToDB(phoneNumber, result)
+    //     .then(() => {
+    //         callback(null, {
+    //             statusCode: 201,
+    //             body: '',
+    //             headers: {
+    //                 'Access-Control-Allow-Origin': '*'
+    //             }
+    //         })
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //     });
 };
+
+function verifyNumber(number) {
+
+    if (number.match(/^(\+1|1)?\d{10}$/)) {
+        let cleanNumber = number.replace(/^(\+1|1)/)
+    }
+}
 
 function addToDB(requestId, data) {
     const params = {
