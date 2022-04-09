@@ -18,7 +18,7 @@ describe('Tests vanity generator', function () {
                     Channel: "VOICE",
                     ContactId: "5ca32fbd-8f92-46af-92a5-6b0f970f0efe",
                     CustomerEndpoint: {
-                        Address: "+11232223369",
+                        Address: "+18006228464",
                         Type: "TELEPHONE_NUMBER"
                     },
                     InitialContactId: "5ca32fbd-8f92-46af-92a5-6b0f970f0efe",
