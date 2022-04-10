@@ -50,7 +50,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     }
 
     // +11236228464
-    let stringStart = 6;
+    let stringStart = 8;
     let input = event.Details.ContactData.CustomerEndpoint.Address.substring(stringStart);
     console.log(input)
     while (input.length >= 3) {
@@ -66,18 +66,17 @@ exports.lambdaHandler = async (event, context, callback) => {
             .then(() => {
                 callback(null, {
                     statusCode: 201,
-                    body: '',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    }
+                    body: result,
                 })
             })
             .catch((err) => {
                 console.log(err)
             });
     } else {
-        console.log(data);
-        return data;
+        callback(null, {
+            statusCode: 201,
+            body: result,
+        })
     }
 };
 
@@ -94,7 +93,7 @@ function addToDB(requestId, data) {
         TableName: "VanityNumbers",
         Item: {
             'phoneNumber': requestId,
-            'message': data,
+            'vanityNumbers': data,
         }
     }
     return ddb.put(params).promise();
