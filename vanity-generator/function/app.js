@@ -81,6 +81,9 @@ exports.lambdaHandler = async (event, context, callback) => {
         //-- Join the 'vanityNumber' Set to be a string separated by commas --//
         let result = [...vanityNumbers].join(', ');
 
+        //-- Counter console.log, used in testing to check efficiency --//
+        console.log('Counter result:', `The step function was called ${counter} times`);
+
         await addToDB(phoneNumber, result);
         callback(null, {
             statusCode: 201,
