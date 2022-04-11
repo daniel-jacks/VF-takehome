@@ -61,6 +61,8 @@ describe('Tests vanity generator', function () {
     it('verifies successful response if phone number does not already exist in database', async () => {
         sandbox.restore();
         let data = { result: '+1800testing, +1800verting, +1800vesting, +180083ruing, +180083sting' };
+        let empty = {};
+        sandbox.stub(DynamoDB.DocumentClient.prototype, 'get').returns({ promise: () => empty });
         sandbox.stub(DynamoDB.DocumentClient.prototype, 'put').returns({ promise: () => data });
         const callback = sinon.spy();
 
@@ -102,7 +104,7 @@ describe('Tests vanity generator', function () {
         expect(result).to.be.an('string');
         expect(result).to.equal('+1800testing, +1800verting, +1800vesting, +180083ruing, +180083sting');
         expect(callback.callCount).to.equal(1);
-        expect(log.callCount).to.equal(3);
+        expect(log.callCount).to.equal(4);
     });
 
     it('test verifyNumber will return error message if phone number is blank or unsupported', async () => {
