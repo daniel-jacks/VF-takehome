@@ -29,12 +29,12 @@ exports.lambdaHandler = async (event, context, callback) => {
         return 'unsupported phone number';
     }
 
-    //-- Parallel arrays used to match the number to it's corresponding letters --//
+    //-- Parallel arrays used to match the number to it's corresponding letter options --//
     let numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
     let options = [[], ['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'], ['j', 'k', 'l'], ['m', 'n', 'o'], ['p', 'q', 'r', 's'], ['t', 'u', 'v'], ['w', 'x', 'y', 'z']];
 
-    //-- A set used to store vanity numbers that are generated, and ultimately stored in DynamoDB --//
-    let vanityNumbers = new Set();
+    //-- A Set used to store vanity numbers that are generated, and ultimately stored in DynamoDB --//
+    let vanityNumbers = new Set(); // Set is used to avoid any chance of duplicated words
 
     //-- Counter used for testing purposes, which will count how many times the 'step' function is run --//
     let counter = 0;
@@ -47,16 +47,18 @@ exports.lambdaHandler = async (event, context, callback) => {
 
     //-- Recursive function used to calculate the words you are able to create with a given phone number --//
     function step(string, tracker, output = '', index = 0) {
-        counter++; // increments counter to keep track of how many times 'step' has been invoked
-        if (string[index]) { // base case, once the index becomes greater than the word length, 'step' stops being called
-            let letters = indexFinder(string[index]); // gets the letters associated to the number at index from string input
-            letters?.forEach(lett => { // used to iterate over each letter from option and perform an action
+        counter++; // increments 'counter' to keep track of how many times 'step' has been invoked
+        if (string[index]) { // BASE CASE, once the index becomes greater than the 'string' length, 'step' stops being called
+            let letters = indexFinder(string[index]); // gets the letters associated to the number at 'index' from 'string' input
+            letters?.forEach(lett => { // used to iterate over each letter from 'letters' and perform an action
                 let strAdd = output; // 'strAdd' and 'nextIdx' needed to have a more narrowed scope, because 'step' is essentially being called on 3 different k-ary trees
                 let nextIdx = index + 1;
-                strAdd += lett; // concatenates the string with the next possible letter
-                if (wordList.includes(strAdd) && (strAdd.length + (tracker - 1) === (phoneNumber.length))) {
+                strAdd += lett; // concatenates 'string' with the next possible letter
+                //-- Adds word to 'vanityNumbers' if the word is included in 'wordList' AND if the word uses all available digits from input --//
+                if (wordList.includes(strAdd) && (strAdd.length + (tracker - 1) === (phoneNumber.length))) { 
                     vanityNumbers.add(`${phoneNumber.substring(0, (tracker - 1))}${strAdd}`);
                 };
+                //-- BASE CASE, Uses Regex to determine if there is a word in 'wordList' array that begins with the current string, if not no longer calls 'step' --//
                 let regex = new RegExp(`^${strAdd}.*`, 'g');
                 if (vanityNumbers.size < 5 && wordList.find(word => word.match(regex))) step(string, tracker, strAdd, nextIdx);
             })
@@ -65,23 +67,23 @@ exports.lambdaHandler = async (event, context, callback) => {
 
     //-- The starting substring for our 'step' function, which begins at 5, making our input the last 7 digits from the input phone number --//
     let stringStart = 5;
-    let input = event.Details.ContactData.CustomerEndpoint.Address.substring(stringStart);
+    let input = phoneNumber.substring(stringStart);
 
     //-- If vanity numbers have previously been calculated for our input phone number, Lambda will just return those options --//
     let data = await getFromDB(phoneNumber);
 
     if (Object.keys(data)?.length < 1) {
-        //-- Iteratively call the step function, with the input progressively getting shorter --//
+        //-- Iteratively call the 'step' function, with the input progressively getting shorter --//
         let minVanityLength = 4; // Potentially ask a caller for input and ask for their minimum length vanity word
         while (input.length >= minVanityLength) {
             step(input, stringStart);
-            input = event.Details.ContactData.CustomerEndpoint.Address.substring(stringStart++);
+            input = phoneNumber.substring(stringStart++);
         };
 
         //-- Join the 'vanityNumber' Set to be a string separated by commas --//
         let result = [...vanityNumbers].join(', ');
 
-        //-- Counter console.log, used in testing to check efficiency --//
+        //-- Counter console.log, used in testing to check efficiency of Lambda --//
         console.log('Counter result:', `The step function was called ${counter} times`);
 
         await addToDB(phoneNumber, result);
