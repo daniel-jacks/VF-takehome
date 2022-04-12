@@ -88,7 +88,7 @@ ___or___ (if you already have your samconfig.toml file configured)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contact
-Feel free to connect with me on <a href='https://www.linkedin.com/in/daniel-jacks/' target="_blank">LinkedIn</a>!
+Feel free to connect with me on <a href='https://www.linkedin.com/in/daniel-jacks/' target='_blank' rel='noopener noreferrer'>LinkedIn</a>!
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Day to Day Tracker 
