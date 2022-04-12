@@ -43,6 +43,13 @@ Once you've completed this step, you may run the following commands in order to 
 
 <hr />
 
+__Cloning Repo:__ 
+```bash
+ git clone git@github.com:daniel-jacks/vanity-numbers.git
+```
+
+<hr />
+
 __Installing Dependancies:__ 
 ```bash
  cd vanity-generator/function
