@@ -1,5 +1,6 @@
 <div id="top"></div>
-# VF-takehome
+
+# Vanity-Generator
 
 ## About the Project
 This project is built with Node.JS, and leverages AWS Lambda, DynamoDB, and Amazon Connect in order to allow users (or callers for our use case) to call the provided number, and be told what the best available vanity numbers are based on the U.S. number they are calling from. The Lambda calculating the vanity numbers is also connected to DynamoDB, and will save up to 5 of the vanity numbers the Lambda creates. <br />
@@ -12,6 +13,7 @@ The Lambda will start with the 7 digits following the area code (so if the input
 (This goes back to what my idea of the "best" vanity numbers is; I think any word that is 3 characters long, or less, is not that memorable.) <br />
 
 The strings that the Lambda produce are checked against a [word list](https://www.npmjs.com/package/wordlist-english) of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Built With
@@ -25,23 +27,60 @@ The strings that the Lambda produce are checked against a [word list](https://ww
 - [Sinon](https://sinonjs.org/)
 - [Chai](https://www.chaijs.com/)
 
+### Framework
+- [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/#:~:text=The%20AWS%20Serverless%20Application%20Model,databases%2C%20and%20event%20source%20mappings.)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Getting Started
-<p align="right">(<a href="#top">back to top</a>)</p>
+Since this application was built out with AWS SAM, you'll need to follow AWS's [instructions](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started.html) regarding getting set up to build and deploy from your machine. <br />
 
-### Prerequisites
-<p align="right">(<a href="#top">back to top</a>)</p>
+Once you've completed this step, you may run the following commands in order to interact with this code base: <br />
 
-### Installation 
+<hr />
+
+__Installing Dependancies:__ 
+```bash
+cd vanity-generator/function
+```
+___then___
+```bash
+npm i
+```
+<hr />
+
+__Run Tests Locally:__ 
+```bash
+cd vanity-generator/function
+```
+___then___
+```bash
+npm run test
+```
+
+<hr />
+
+__Build and Deploy to AWS:__
+```bash
+cd vanity-generator
+```
+___then___
+```bash
+sam deploy --guided
+```
+___or___ (if you already have your samconfig.toml file configured)
+```bash
+sam deploy
+```
+`sam deploy --guided` &nbsp; will walk you through configuring your `samconfig.toml` file. This file will be responsible for your __AWS Stack__ (located in AWS CloudFormation), your provisioned __S3 bucket__, the __region__ where you are deploying to, the __IAM role__ associated to your Lambda function, and of course, the __Lambda function__ itself. 
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contact
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-jacks/)!
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Day to Day Tracker 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 - Tuesday: Today was the first day working on this project. My biggest goal for EOD was getting a better understanding of how to interact with Amazon Connect, setting up my local environment in order to make building this as straightforward as possible, and finally, to have a UML laid out for me to reference going into the week (and make adjustments as I see fit). 
 
@@ -58,3 +97,5 @@ The strings that the Lambda produce are checked against a [word list](https://ww
 - Monday: Big big day, had my note written down that read "use array.find() with regex, in order to be able to match beginning of words, and ultimately find longer words with less function calls". My idea that I had the night prior was this: why waste time and memory checking __all__ the outcomes of a 7 digit number, when I could just check if there was a word in the word-list that even _started_ with my current string. I ended up implementing this and cut out 99% of the extra workload the function was sifting through. The find method using regex acts as another base case for the step function being called. I used a counter to calculate just how much more efficient the function was, with the total number of invocations before the find method being 10593, and the total number after at just 143 on the same input. I spent the rest of the day cleaning up the function and commenting to help make it more readable, as well as building out three integration tests to check if my function was properly trying to get and put to the DynamoDB table. 
 
 - Tuesday: 
+
+<p align="right">(<a href="#top">back to top</a>)</p>
