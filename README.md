@@ -29,7 +29,7 @@ I used Replit to easily build out/test my step function and how efficient it is.
 - [Replit](https://replit.com/) - used for singling out and implementing chunks of code in a sandbox environment
 
 ### Framework
-- [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/#:~:text=The%20AWS%20Serverless%20Application%20Model,databases%2C%20and%20event%20source%20mappings.)📚
+- [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/#:~:text=The%20AWS%20Serverless%20Application%20Model,databases%2C%20and%20event%20source%20mappings.) &nbsp;📚
 
  <br />
 
