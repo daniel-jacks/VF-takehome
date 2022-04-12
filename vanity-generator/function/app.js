@@ -84,7 +84,7 @@ exports.lambdaHandler = async (event, context, callback) => {
         //-- Join the 'vanityNumber' Set to be a string separated by commas --//
         let result = [...vanityNumbers].join(', ');
         let [item1, item2, item3] = [...vanityNumbers];
-        textToSpeech = item1 ? [item1, item2, item3].join() : 'No vanity numbers found';
+        textToSpeech = result.length > 11 ? [item1, item2, item3].join() : 'No vanity numbers found';
 
         //-- Counter console.log, used in testing to check efficiency of Lambda --//
         console.log('Counter result:', `The step function was called ${counter} times`);
@@ -97,7 +97,7 @@ exports.lambdaHandler = async (event, context, callback) => {
 
     } else if (!Object.keys(data)?.length < 1) {
         let [item1, item2, item3] = data?.Item?.vanityNumbers.split(',');
-        textToSpeech = [item1, item2, item3].join();
+        textToSpeech = item1.length > 10 ? [item1, item2, item3].join() : 'No vanity numbers found';
 
         callback(null, {
             statusCode: 201,
