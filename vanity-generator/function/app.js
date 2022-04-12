@@ -40,7 +40,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     let counter = 0;
 
     //-- Helper function used to map numbers to options --//
-    function indexFinder(number) {
+    function letterFinder(number) {
         let index = numbers.findIndex(element => element === number);
         return options[index];
     }
@@ -49,11 +49,11 @@ exports.lambdaHandler = async (event, context, callback) => {
     function step(string, tracker, output = '', index = 0) {
         counter++; // increments 'counter' to keep track of how many times 'step' has been invoked
         if (string[index]) { // BASE CASE, once the index becomes greater than the 'string' length, 'step' stops being called
-            let letters = indexFinder(string[index]); // gets the letters associated to the number at 'index' from 'string' input
-            letters?.forEach(lett => { // used to iterate over each letter from 'letters' and perform an action
+            let letters = letterFinder(string[index]); // gets the letters associated to the number at 'index' from 'string' input
+            letters?.forEach(letter => { // used to iterate over each letter from 'letters' and perform an action
                 let strAdd = output; // 'strAdd' and 'nextIdx' needed to have a more narrowed scope, because 'step' is essentially being called on 3 different k-ary trees
                 let nextIdx = index + 1;
-                strAdd += lett; // concatenates 'string' with the next possible letter
+                strAdd += letter; // concatenates 'string' with the next possible letter
                 //-- Adds word to 'vanityNumbers' if the word is included in 'wordList' AND if the word uses all available digits from input --//
                 if (wordList.includes(strAdd) && (strAdd.length + (tracker - 1) === (phoneNumber.length)) && vanityNumbers.size < 5) { 
                     vanityNumbers.add(`${phoneNumber.substring(0, (tracker - 1))}${strAdd}`);
@@ -84,7 +84,7 @@ exports.lambdaHandler = async (event, context, callback) => {
         //-- Join the 'vanityNumber' Set to be a string separated by commas --//
         let result = [...vanityNumbers].join(', ');
         let [item1, item2, item3] = [...vanityNumbers];
-        textToSpeech = [item1, item2, item3].join();
+        textToSpeech = item1 ? [item1, item2, item3].join() : 'No vanity numbers found';
 
         //-- Counter console.log, used in testing to check efficiency of Lambda --//
         console.log('Counter result:', `The step function was called ${counter} times`);
@@ -95,7 +95,7 @@ exports.lambdaHandler = async (event, context, callback) => {
         })
         return result;
 
-    } else if (!Object.keys(data).length < 1) {
+    } else if (!Object.keys(data)?.length < 1) {
         let [item1, item2, item3] = data?.Item?.vanityNumbers.split(',');
         textToSpeech = [item1, item2, item3].join();
 
