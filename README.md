@@ -12,7 +12,9 @@ The Lambda will start with the 7 digits following the area code (so if the input
 2. The input string is less than 4 digits long
 (This goes back to what my idea of the "best" vanity numbers is; I think any word that is 3 characters long, or less, is not that memorable.) <br />
 
-The strings that the Lambda produce are checked against a [word list](https://www.npmjs.com/package/wordlist-english) of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect.
+The strings that the Lambda produce are checked against a [word list](https://www.npmjs.com/package/wordlist-english) of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect. <br />
+
+I used Replit to easily build out/test my step function and how efficient it is. Check out the [efficiency test](https://replit.com/@daniel-jacks/VanityNumbas#index.js) and follow the instructions between lines 30 - 34 to compare the recursive function before and after the regex implementation. It takes a second to run so give it a bit of time.  
 
 ## Built With
 ### Application
@@ -22,8 +24,9 @@ The strings that the Lambda produce are checked against a [word list](https://ww
 - [Amazon Connect](https://aws.amazon.com/pm/connect/)
 
 ### Testing 
-- [Sinon](https://sinonjs.org/)
-- [Chai](https://www.chaijs.com/)
+- [Sinon](https://sinonjs.org/) - spies, stubs, and mocks for tracking functions in test context
+- [Chai](https://www.chaijs.com/) - test driven development assertion library
+- [Replit](https://replit.com/) - used for singling out and implementing chunks of code in a sandbox environment
 
 ### Framework
 - [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/#:~:text=The%20AWS%20Serverless%20Application%20Model,databases%2C%20and%20event%20source%20mappings.)
