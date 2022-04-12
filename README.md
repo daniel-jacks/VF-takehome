@@ -14,8 +14,6 @@ The Lambda will start with the 7 digits following the area code (so if the input
 
 The strings that the Lambda produce are checked against a [word list](https://www.npmjs.com/package/wordlist-english) of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ## Built With
 ### Application
 - [Node.JS](https://nodejs.org/en/)
@@ -41,36 +39,36 @@ Once you've completed this step, you may run the following commands in order to 
 
 __Installing Dependancies:__ 
 ```bash
-cd vanity-generator/function
+$ cd vanity-generator/function
 ```
 ___then___
 ```bash
-npm i
+$ npm i
 ```
 <hr />
 
 __Run Tests Locally:__ 
 ```bash
-cd vanity-generator/function
+$ cd vanity-generator/function
 ```
 ___then___
 ```bash
-npm run test
+$ npm run test
 ```
 
 <hr />
 
 __Build and Deploy to AWS:__
 ```bash
-cd vanity-generator
+$ cd vanity-generator
 ```
 ___then___
 ```bash
-sam deploy --guided
+$ sam deploy --guided
 ```
 ___or___ (if you already have your samconfig.toml file configured)
 ```bash
-sam deploy
+$ sam deploy
 ```
 `sam deploy --guided` &nbsp; will walk you through configuring your `samconfig.toml` file. This file will be responsible for your __AWS Stack__ (located in AWS CloudFormation), your provisioned __S3 bucket__, the __region__ where you are deploying to, the __IAM role__ associated to your Lambda function, and of course, the __Lambda function__ itself. 
 
@@ -96,6 +94,6 @@ Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-ja
 
 - Monday: Big big day, had my note written down that read "use array.find() with regex, in order to be able to match beginning of words, and ultimately find longer words with less function calls". My idea that I had the night prior was this: why waste time and memory checking __all__ the outcomes of a 7 digit number, when I could just check if there was a word in the word-list that even _started_ with my current string. I ended up implementing this and cut out 99% of the extra workload the function was sifting through. The find method using regex acts as another base case for the step function being called. I used a counter to calculate just how much more efficient the function was, with the total number of invocations before the find method being 10593, and the total number after at just 143 on the same input. I spent the rest of the day cleaning up the function and commenting to help make it more readable, as well as building out three integration tests to check if my function was properly trying to get and put to the DynamoDB table. 
 
-- Tuesday: 
+- Tuesday: Today was spent cleaning up the README and the repo as a whole. I wanted to make sure there were no unused files or unused code. I also reviewed all the code to ensure everything was working as I wanted it to be before submitting it.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
