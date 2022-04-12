@@ -12,7 +12,7 @@ The Lambda will start with the 7 digits following the area code (so if the input
 2. The input string is less than 4 digits long
 (This goes back to what my idea of the "best" vanity numbers is; I think any word that is 3 characters long, or less, is not that memorable.) <br />
 
-The strings that the Lambda produce are checked against a [word list](https://www.npmjs.com/package/wordlist-english) of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect. <br />
+The strings that the Lambda produce are checked against a [word list](https://www.npmjs.com/package/wordlist) of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect. <br />
 
 I used Replit to easily build out/test my step function and how efficient it is. If you'd like, you can check out the [efficiency test](https://replit.com/@daniel-jacks/VanityNumbas#index.js), fork the replit, and follow the instructions between lines 30 - 35 to compare the recursive function before and after the regex implementation. It takes a second to run either way so give it a bit of time.  
 
