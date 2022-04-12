@@ -55,7 +55,7 @@ exports.lambdaHandler = async (event, context, callback) => {
                 let nextIdx = index + 1;
                 strAdd += lett; // concatenates 'string' with the next possible letter
                 //-- Adds word to 'vanityNumbers' if the word is included in 'wordList' AND if the word uses all available digits from input --//
-                if (wordList.includes(strAdd) && (strAdd.length + (tracker - 1) === (phoneNumber.length))) { 
+                if (wordList.includes(strAdd) && (strAdd.length + (tracker - 1) === (phoneNumber.length)) && vanityNumbers.size < 5) { 
                     vanityNumbers.add(`${phoneNumber.substring(0, (tracker - 1))}${strAdd}`);
                 };
                 //-- BASE CASE, Uses Regex to determine if there is a word in 'wordList' array that begins with the current string, if not no longer calls 'step' --//
@@ -71,6 +71,7 @@ exports.lambdaHandler = async (event, context, callback) => {
 
     //-- If vanity numbers have previously been calculated for our input phone number, Lambda will just return those options --//
     let data = await getFromDB(phoneNumber);
+    let textToSpeech;
 
     if (Object.keys(data)?.length < 1) {
         //-- Iteratively call the 'step' function, with the input progressively getting shorter --//
@@ -82,21 +83,25 @@ exports.lambdaHandler = async (event, context, callback) => {
 
         //-- Join the 'vanityNumber' Set to be a string separated by commas --//
         let result = [...vanityNumbers].join(', ');
+        let [item1, item2, item3] = [...vanityNumbers];
+        textToSpeech = [item1, item2, item3].join();
 
         //-- Counter console.log, used in testing to check efficiency of Lambda --//
         console.log('Counter result:', `The step function was called ${counter} times`);
-
         await addToDB(phoneNumber, result);
         callback(null, {
             statusCode: 201,
-            body: result,
+            body: textToSpeech,
         })
         return result;
 
     } else if (!Object.keys(data).length < 1) {
+        let [item1, item2, item3] = data?.Item?.vanityNumbers.split(',');
+        textToSpeech = [item1, item2, item3].join();
+
         callback(null, {
             statusCode: 201,
-            body: data?.Item?.vanityNumbers,
+            body: textToSpeech,
         });
         return data.Item.vanityNumbers;
     }
