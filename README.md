@@ -14,23 +14,26 @@ The Lambda will start with the 7 digits following the area code (so if the input
 
 The strings that the Lambda produce are checked against a [word list](https://www.npmjs.com/package/wordlist-english) of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect. <br />
 
-I used Replit to easily build out/test my step function and how efficient it is. Check out the [efficiency test](https://replit.com/@daniel-jacks/VanityNumbas#index.js) and follow the instructions between lines 30 - 34 to compare the recursive function before and after the regex implementation. It takes a second to run so give it a bit of time.  
+I used Replit to easily build out/test my step function and how efficient it is. If you'd like, you can check out the [efficiency test](https://replit.com/@daniel-jacks/VanityNumbas#index.js), fork the replit, and follow the instructions between lines 30 - 35 to compare the recursive function before and after the regex implementation. It takes a second to run either way so give it a bit of time.  
 
 ## Built With
 ### Application
 - [Node.JS](https://nodejs.org/en/)
-- [AWS Lambda](https://aws.amazon.com/lambda/)
-- [AWS DynamoDB](https://aws.amazon.com/dynamodb/)
-- [Amazon Connect](https://aws.amazon.com/pm/connect/)
+- [AWS Lambda](https://aws.amazon.com/lambda/) &nbsp;📚
+- [AWS DynamoDB](https://aws.amazon.com/dynamodb/) &nbsp;📚
+- [Amazon Connect](https://aws.amazon.com/pm/connect/) &nbsp;📚
 
 ### Testing 
-- [Sinon](https://sinonjs.org/) - spies, stubs, and mocks for tracking functions in test context
-- [Chai](https://www.chaijs.com/) - test driven development assertion library
+- [Sinon](https://sinonjs.org/) &nbsp;📚 - spies, stubs, and mocks for tracking functions in test context
+- [Chai](https://www.chaijs.com/) &nbsp;📚 - test driven development assertion library
 - [Replit](https://replit.com/) - used for singling out and implementing chunks of code in a sandbox environment
 
 ### Framework
-- [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/#:~:text=The%20AWS%20Serverless%20Application%20Model,databases%2C%20and%20event%20source%20mappings.)
+- [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/#:~:text=The%20AWS%20Serverless%20Application%20Model,databases%2C%20and%20event%20source%20mappings.)*
 
+ <br />
+
+📚 - New tech I learned during the development of this project
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Getting Started
