@@ -12,24 +12,24 @@ The Lambda will start with the 7 digits following the area code (so if the input
 2. The input string is less than 4 digits long
 (This goes back to what my idea of the "best" vanity numbers is; I think any word that is 3 characters long, or less, is not that memorable.) <br />
 
-The strings that the Lambda produce are checked against a <a href='https://www.npmjs.com/package/wordlist-english' target='_blank'>word list</a> of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect. <br />
+The strings that the Lambda produce are checked against a [word list](https://www.npmjs.com/package/wordlist-english) of ~275000 words, and if the string is included in this list, it will be added to the vanity numbers array. This array will ultimately be returned to the caller in the form of text-to-speech via Amazon Connect. <br />
 
-I used Replit to easily build out/test my step function and how efficient it is. If you'd like, you can check out the <a href='https://replit.com/@daniel-jacks/VanityNumbas#index.js' target='_blank'>efficiency test</a>, fork the replit, and follow the instructions between lines 30 - 35 to compare the recursive function before and after the regex implementation. It takes a second to run either way so give it a bit of time.  
+I used Replit to easily build out/test my step function and how efficient it is. If you'd like, you can check out the [efficiency test](https://replit.com/@daniel-jacks/VanityNumbas#index.js), fork the replit, and follow the instructions between lines 30 - 35 to compare the recursive function before and after the regex implementation. It takes a second to run either way so give it a bit of time.  
 
 ## Built With
 ### Application
-- <a href='https://nodejs.org/en/' target='_blank'>Node.JS</a>
-- <a href='https://aws.amazon.com/lambda/' target='_blank'>AWS Lambda</a> &nbsp;📚
-- <a href='https://aws.amazon.com/dynamodb/' target='_blank'>AWS DynamoDB</a> &nbsp;📚
-- <a href='https://aws.amazon.com/pm/connect/' target='_blank'>Amazon Connect</a> &nbsp;📚
+- [Node.JS](https://nodejs.org/en/)
+- [AWS Lambda](https://aws.amazon.com/lambda/) &nbsp;📚
+- [AWS DynamoDB](https://aws.amazon.com/dynamodb/) &nbsp;📚
+- [Amazon Connect](https://aws.amazon.com/pm/connect/) &nbsp;📚
 
 ### Testing 
-- <a href='https://sinonjs.org/' target='_blank'>Sinon</a> &nbsp;📚 - spies, stubs, and mocks for tracking functions in test context
-- <a href='https://www.chaijs.com/' target='_blank'>Chai</a> &nbsp;📚 - test driven development assertion library
-- <a href='https://replit.com/' target='_blank'>Replit</a> &nbsp;📚 - used for singling out and implementing chunks of code in a sandbox environment
+- [Sinon](https://sinonjs.org/) &nbsp;📚 - spies, stubs, and mocks for tracking functions in test context
+- [Chai](https://www.chaijs.com/) &nbsp;📚 - test driven development assertion library
+- [Replit](https://replit.com/) - used for singling out and implementing chunks of code in a sandbox environment
 
 ### Framework
-- <a href='https://aws.amazon.com/serverless/sam/#:~:text=The%20AWS%20Serverless%20Application%20Model,databases%2C%20and%20event%20source%20mappings.' target='_blank'>AWS Serverless Application Model (SAM)</a> &nbsp;📚
+- [AWS Serverless Application Model (SAM)](https://aws.amazon.com/serverless/sam/#:~:text=The%20AWS%20Serverless%20Application%20Model,databases%2C%20and%20event%20source%20mappings.) &nbsp;📚
 
  <br />
 
@@ -37,7 +37,7 @@ I used Replit to easily build out/test my step function and how efficient it is.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Getting Started
-Since this application was built out with AWS SAM, you'll need to follow AWS's <a href='https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started.html' target='_blank'>instructions</a> regarding getting set up to build and deploy from your machine. <br />
+Since this application was built out with AWS SAM, you'll need to follow AWS's [instructions](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started.html) regarding getting set up to build and deploy from your machine. <br />
 
 Once you've completed this step, you may run the following commands in order to interact with this code base: <br />
 
@@ -88,7 +88,7 @@ ___or___ (if you already have your samconfig.toml file configured)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contact
-Feel free to connect with me on <a href='https://www.linkedin.com/in/daniel-jacks/' target='_blank' rel='noopener noreferrer'>LinkedIn</a>!
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-jacks/)!
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Day to Day Tracker 
