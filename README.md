@@ -100,7 +100,7 @@ Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/daniel-ja
 
 ## With More Time I'd Like To...
 - Allow for the customer to determine their desired vanity length, by inputting a number with their phone and building the Contact Flow to incorporate that. 
-- Unit testing, I wanted to focus the local tests on integration because I was able to test the Lambda easily once deployed to AWS.
+- Unit testing, I wanted to focus the local tests on integration because I was able to test the Lambda easily once deployed to AWS. With that being said, I still think unit testing locally would be helpful and I would have done that if given more time.
 - A more versatile Contact Flow in general. For example, having a different response if the caller's number can't produce any vanity numbers.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
