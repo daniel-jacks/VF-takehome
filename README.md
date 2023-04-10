@@ -75,7 +75,9 @@ __Build and Deploy to AWS:__
 ```bash
  cd vanity-generator
 ```
-___then___
+___then (if you don't have AWS SAM CLI installed)___
+Go to 'https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html' and follow AWS's instructions
+
 ```bash
  sam deploy --guided
 ```
