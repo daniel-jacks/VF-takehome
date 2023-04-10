@@ -80,6 +80,7 @@ __Build and Deploy to AWS:__
 ```
 ___then (if you don't have AWS SAM CLI installed)___
 <br />
+
 Go to [Installing the AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) and follow AWS installation instructions
 <br /> 
 
