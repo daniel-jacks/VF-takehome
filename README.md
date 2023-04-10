@@ -2,6 +2,9 @@
 
 # Vanity-Generator
 
+## Like to try it out?!
+If you'd like me to provide the phone number you can call in order to generate your vanity numbers, please feel free to email me at daniel.jakob.jackson@gmail.com or reach out to me on [LinkedIn](https://www.linkedin.com/in/daniel-jacks/).
+
 ## About the Project
 This project is built with Node.JS, and leverages AWS Lambda, DynamoDB, and Amazon Connect in order to allow users (or callers for our use case) to call the provided number, and be told what the best available vanity numbers are based on the U.S. number they are calling from. The Lambda calculating the vanity numbers is also connected to DynamoDB, and will save up to 5 of the vanity numbers the Lambda creates. <br />
 
