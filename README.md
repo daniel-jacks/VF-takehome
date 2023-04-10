@@ -77,7 +77,7 @@ __Build and Deploy to AWS:__
 ```
 ___then (if you don't have AWS SAM CLI installed)___
 ```bash
-Go to "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html" and follow AWS's installation instructions
+Go to "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html" and follow AWS\'s installation instructions
 ```
 __then__
 ```bash
