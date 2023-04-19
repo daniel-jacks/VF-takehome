@@ -6,6 +6,8 @@
 If you'd like me to provide the phone number you can call in order to generate your vanity numbers, please feel free to email me at daniel.jakob.jackson@gmail.com or reach out to me on [LinkedIn](https://www.linkedin.com/in/daniel-jacks/).
 
 ## About the Project
+I developed this project to gain a deeper understanding of Amazon Connect, DynamoDB, and Lambdas, and how these various AWS services can be constructed and tested locally before being deployed with the help of the AWS SAM CLI. <br />
+
 This project is built with Node.JS, and leverages AWS Lambda, DynamoDB, and Amazon Connect in order to allow users (or callers for our use case) to call the provided number, and be told what the best available vanity numbers are based on the U.S. number they are calling from. The Lambda calculating the vanity numbers is also connected to DynamoDB, and will save up to 5 of the vanity numbers the Lambda creates. <br />
 
 I decided that "best" in terms of vanity numbers is how long the word is. I think having a number that reads "1-800-testing" is a lot more memorable (and therefore better) than " 1-800-537-2cat". I built out the Lambda function according to this principle. <br /> 
