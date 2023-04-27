@@ -20,6 +20,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     //-- Entire phoneNumber from event input, used as the unique identifier to add and get from DynamoDB --//
     let phoneNumber = event.Details.ContactData.CustomerEndpoint.Address;
 
+    console.log(`CALL FROM: ${phoneNumber}`)
     //-- Checking whether or not the number is valid, and if not immediately ends the Lambda and returns error status code and error message --//
     if (!verifyNumber(phoneNumber)) {
         callback(null, {
@@ -86,6 +87,7 @@ exports.lambdaHandler = async (event, context, callback) => {
         let [item1, item2, item3] = [...vanityNumbers];
         textToSpeech = result.length > 11 ? [item1, item2, item3].join() : 'No vanity numbers found';
 
+        console.log(`TEST TO SPEAK CREATED: ${textToSpeech}`)
         //-- Counter console.log, used in testing to check efficiency of Lambda --//
         console.log('Counter result:', `The step function was called ${counter} times`);
         await addToDB(phoneNumber, result);
@@ -109,7 +111,7 @@ exports.lambdaHandler = async (event, context, callback) => {
 
 //-- Helper functions to addTo and getFrom DynamoDB table --//
 function addToDB(requestId, data) {
-    console.log('Add to DB called');
+    console.log(`ADD TO DB CALLED, PHONE NUMBER: ${phoneNumber}, TEXTTOSPEECH: ${textToSpeech} `);
     const params = {
         TableName: 'VanityNumbers',
         Item: {
@@ -122,7 +124,7 @@ function addToDB(requestId, data) {
 
 
 function getFromDB(requestId) {
-    console.log('Get from DB called');
+    console.log(`GET FROM DB CALLED: ${requestId}`);
     const params = {
         TableName: 'VanityNumbers',
         Key: {
