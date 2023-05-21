@@ -111,7 +111,7 @@ exports.lambdaHandler = async (event, context, callback) => {
 
 //-- Helper functions to addTo and getFrom DynamoDB table --//
 function addToDB(requestId, data) {
-    console.log(`ADD TO DB CALLED, PHONE NUMBER: ${phoneNumber}, TEXTTOSPEECH: ${textToSpeech} `);
+    console.log(`ADD TO DB CALLED, PHONE NUMBER: ${requestId}, TEXTTOSPEECH: ${data} `);
     const params = {
         TableName: 'VanityNumbers',
         Item: {
