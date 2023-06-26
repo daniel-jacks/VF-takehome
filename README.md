@@ -99,7 +99,7 @@ ___or___ (if you already have your samconfig.toml file configured)
 
 __Please note:__ 
 <br />
-using `sam deploy` is only responsible for setting up the AWS resources listed above. In order to link these resources to Amazon Connect, I recommend stepping through the [AWS Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-get-started.html****).
+using `sam deploy` is only responsible for setting up the AWS resources listed above. In order to link these resources to Amazon Connect, I recommend stepping through the [Amazon Connect Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-get-started.html).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
