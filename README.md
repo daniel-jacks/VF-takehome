@@ -95,7 +95,9 @@ ___or___ (if you already have your samconfig.toml file configured)
 ```bash
  sam deploy
 ```
-`sam deploy --guided` &nbsp; will walk you through configuring your `samconfig.toml` file. This file will be responsible for your __AWS Stack__ (located in AWS CloudFormation), your provisioned __S3 bucket__, the __region__ where you are deploying to, the __IAM role__ associated to your Lambda function, and of course, the __Lambda function__ itself. 
+`sam deploy --guided` &nbsp; will walk you through configuring your `samconfig.toml` file. This file will be responsible for your __AWS Stack__ (located in AWS CloudFormation), your provisioned __S3 bucket__, the __API Gateway__ used to trigger the function, the __region__ where you are deploying to, the __IAM role__ associated to your Lambda function, and of course, the __Lambda function__ itself. 
+
+**Please note:** using "sam deploy" is only responsible for setting up the AWS resources listed above. In order to link these resources to Amazon Connect, I recommend using [AWS Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-get-started.html****)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
