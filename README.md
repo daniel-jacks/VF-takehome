@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-# Vanity-Generator
+# Vanity Number Generator
 
 ## Want to try it out?!
 If you'd like me to provide the phone number you can call in order to generate your vanity numbers, please feel free to email me at daniel.jakob.jackson@gmail.com or reach out to me on [LinkedIn](https://www.linkedin.com/in/daniel-jacks/).
